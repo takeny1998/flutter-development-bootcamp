@@ -13,7 +13,7 @@ void main() {
 
         body: const Center(
           child: Image(
-            image: NetworkImage('http://www.w3bai.com/css/img_lights.jpg'),
+            image: AssetImage('images/diamond.png'),
           ),
         ),
       ),
