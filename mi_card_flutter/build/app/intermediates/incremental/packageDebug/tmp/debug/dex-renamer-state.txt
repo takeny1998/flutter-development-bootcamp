@@ -1,4 +1,4 @@
-#Fri Feb 04 16:13:09 KST 2022
+#Fri Feb 04 17:18:49 KST 2022
 base.0=C\:\\Users\\Heebeom Yang\\Documents\\GitHub\\flutter-development-bootcamp\\mi_card_flutter\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
