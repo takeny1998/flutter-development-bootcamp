@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.teal,
           body: SafeArea(
               child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               CircleAvatar(
                 radius: 50.0,
@@ -35,52 +36,64 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Source Sans Pro',
                   )),
-              Container(
+              SizedBox(
+                width: 200.0,
+                height: 50.0,
+                child: Divider(
+                  thickness: 2,
+                  color: Colors.teal.shade100,
+                ),
+              ),
+              Card(
+                color: Colors.white,
+                margin: EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 30.0
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.domain, color: Colors.teal),
+                  title: Text('DB Lab, Cheongju UNIV.',
+                    style: TextStyle(
+                      color: Colors.teal.shade900,
+                      fontSize: 18.0,
+                      fontFamily: 'Source Sans Pro',
+                    ),
+                  ),
+                ),
+              ),
+              Card(
                 color: Colors.white,
                 margin: EdgeInsets.symmetric(
                   vertical: 10.0,
-                  horizontal: 25.0,
+                  horizontal: 30.0,
                 ),
-                padding: EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.phone,
-                      color: Colors.teal,
+                child: ListTile(
+                  leading: Icon(Icons.phone, color: Colors.teal),
+                  title: Text(
+                    '+82 10-9427-3520',
+                    style: TextStyle(
+                      color: Colors.teal.shade900,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 18.0,
                     ),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      '+82 010 9427 3520',
-                      style: TextStyle(
-                        color: Colors.teal.shade900,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 18.0,
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
-              Container(
+              Card(
                 color: Colors.white,
                 margin: EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 25.0),
-                padding: EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Icon(Icons.email, color: Colors.teal),
-                    SizedBox(width: 10.0),
-                    Text('takeny1998@gmail.com',
-                      style: TextStyle(
-                        color: Colors.teal.shade900,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 18.0,
-                      ),
-                    )
-                  ],
-                ),
-              )
+                    vertical: 10.0, horizontal: 30.0),
+                child: ListTile(
+                  leading: Icon(Icons.email, color: Colors.teal),
+                  title: Text(
+                    'takeny1998@gmail.com',
+                    style: TextStyle(
+                      color: Colors.teal.shade900,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 18.0,
+                    ),
+                  ),
+                )
+              ),
             ],
           ))),
     );
