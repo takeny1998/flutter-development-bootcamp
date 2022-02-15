@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -27,13 +29,40 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<Question> questions = [
-    Question(text: 'You can lead a cow down stairs but not up stairs.', answer: false),
-    Question(text: 'Approximately one quarter of human bones are in the feet.', answer: true),
-    Question(text: 'A slug\'s blood is green.', answer: true),
-  ];
 
-  int ptr = 0;
+  void checkAnswer(bool picked) {
+    bool correct = quizBrain.getAnswer();
+    if (picked == correct) {
+      scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+    } else {
+      scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+    }
+
+    setState(() {
+      if(!quizBrain.nextQuestion()) {
+        Alert(
+          context: context,
+          title: "GREAT JOB!",
+          desc: "You reached end of questions.",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "GO BACK",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                setState(() {
+                  scoreKeeper = [];
+                  quizBrain.clean();
+                });
+              },
+            )
+          ],
+        ).show();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +77,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[ptr].text,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -74,16 +103,7 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  bool correct = questions[ptr].answer;
-                  if (correct == true) {
-                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
-                  } else {
-                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
-                  }
-
-                  setState(() {
-                    ptr ++;
-                  });
+                  checkAnswer(true);
                 },
               ),
             ),
@@ -102,20 +122,10 @@ class _QuizPageState extends State<QuizPage> {
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
-                  ),
+                  )
                 ),
                 onPressed: () {
-
-                  bool correct = questions[ptr].answer;
-                  if (correct == false) {
-                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
-                  } else {
-                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
-                  }
-
-                  setState(() {
-                    ptr ++;
-                  });
+                  checkAnswer(false);
                 },
               ),
             ),
